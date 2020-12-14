@@ -1,7 +1,6 @@
 from django.db import models
-from core import models as core_models
 from django_countries.fields import CountryField
-from users import models as user_models
+from core import models as core_models
 
 
 class AbstractItem(core_models.TimeStampedModel):
