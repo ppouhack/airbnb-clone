@@ -84,6 +84,10 @@ class RoomAdmin(admin.ModelAdmin):
         "house_rules",
     )
 
+    def save_model(self, request, obj, form, change):
+        print(obj, change, form)
+        super().save_model(request, obj, form, change)
+
     def count_amenities(self, obj):
         return obj.amenities.count()
 
@@ -91,6 +95,8 @@ class RoomAdmin(admin.ModelAdmin):
 
     def count_photos(self, obj):
         return obj.photos.count()
+
+    count_photos.short_description = "Photo Count"
 
 
 @admin.register(models.Photo)
