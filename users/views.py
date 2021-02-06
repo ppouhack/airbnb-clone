@@ -3,6 +3,7 @@ from django.views.generic import FormView
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 from . import forms
 
 # Create your views here.
@@ -19,11 +20,13 @@ class LoginView(FormView):
         user = authenticate(self.request, username=email, password=password)
         if user is not None:
             login(self.request, user)
+            messages.info(self.request, f"Welcome back {user.first_name}")
         return super().form_valid(form)
 
 
 def log_out(request):
     logout(request)
+    messages.info(request, "bye")
     return redirect(reverse("core:home"))
 
 
